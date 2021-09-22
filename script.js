@@ -1,7 +1,7 @@
-let canvas = document.getElementById("snake");
+let canvas = document.getElementById("snake"); //criar elemento que irá rodar o jogo
 let context = canvas.getContext("2d");
 let box = 32;
-let snake = [];
+let snake = []; //criar cobrinha como lista, já que ela vai ser uma série de coordenadas, que quando pintadas, criam os quadradinhos
 snake[0] = {
     x: 8 * box,
     y: 8 * box,
@@ -18,7 +18,7 @@ let food = {
 //criar background, desenha tela
 function criarBG(){
     context.fillStyle = "lightgreen";
-    context.fillRect(0, 0, 16 * box, 16 * box);
+    context.fillRect(0, 0, 16 * box, 16 * box); //desenha o retângulo usando x e y e a largura e altura setadas
 }
 
 //cria a cobrinha
@@ -35,7 +35,7 @@ function drawFood(){
     context.fillRect(food.x, food.y, box, box);
 }
 
-//evento que capta o comando direcional do teclado
+//quando um evento acontece, detecta e chama uma função
 document.addEventListener('keydown', update);
 //função que faz com que a cobrinha não fique com 2 cabeças em caso de comando que inverte a direção do movimento
 function update (event){
@@ -74,9 +74,8 @@ function iniciarJogo(){
     if (direction == "up") snakeY -= box;
     if (direction == "down") snakeY += box;
 
-    //aumentar o rabo da cobrinha e troca a comidinha de lugar
     if (snakeX != food.x || snakeY != food.y){
-        snake.pop();
+        snake.pop(); //pop tira o último elemento da lista
     }
     else{
         food.x = Math.floor(Math.random() * 15 + 1) * box;
@@ -89,8 +88,8 @@ function iniciarJogo(){
         y: snakeY,
     }
 
-    snake.unshift(newHead);
+    snake.unshift(newHead); //método unshift adiciona como primeiro quadradinho da cobrinha
 
 }
-//atualiza a tela
+
 let jogo = setInterval(iniciarJogo, 100);
